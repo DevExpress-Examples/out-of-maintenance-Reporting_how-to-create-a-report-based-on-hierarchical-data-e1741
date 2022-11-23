@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+using DevExpress.Drawing;
 using DevExpress.XtraReports.UI;
 
 namespace RepTreeListHierarchicalDataRelationships {
@@ -41,9 +42,9 @@ namespace RepTreeListHierarchicalDataRelationships {
 
             headerBand.Height = 50;
             detailBand.Height = 25;
-            title.Size = new Size(report.PageWidth - report.Margins.Left - report.Margins.Right - 1, 50);
+            title.SizeF = new SizeF(report.PageWidth - report.Margins.Left - report.Margins.Right - 1, 50);
             title.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            title.Font = new Font(title.Font.FontFamily, 20);
+            title.Font = new DXFont(title.Font.Name, 20);
             title.Text = "Hierarchical Data Report";
 
             headerBand.Controls.Add(title);
@@ -65,7 +66,7 @@ namespace RepTreeListHierarchicalDataRelationships {
         }
 
         private void AddDataFieldsToBand(DataTable dataTable, DetailBand band, string dataPath, bool addKeyFields) {
-            XRTable table = XRTable.CreateTable(new Rectangle(indent, 0, report.PageWidth - report.Margins.Left - report.Margins.Right - indent - 1, 25), 1, dataTable.Columns.Count - (addKeyFields ? 0 : 2));
+            XRTable table = XRTable.CreateTable(new RectangleF(indent, 0, report.PageWidth - report.Margins.Left - report.Margins.Right - indent - 1, 25), 1, dataTable.Columns.Count - (addKeyFields ? 0 : 2));
             int cellIndex = 0;
 
             for(int i = 0; i < dataTable.Columns.Count; i++) {

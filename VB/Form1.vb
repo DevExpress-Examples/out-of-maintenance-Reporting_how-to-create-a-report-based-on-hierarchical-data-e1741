@@ -4,6 +4,7 @@ Imports System.Collections.Generic
 Imports System.Data
 Imports System.Drawing
 Imports System.Windows.Forms
+Imports DevExpress.Drawing
 Imports DevExpress.XtraReports.UI
 
 Namespace RepTreeListHierarchicalDataRelationships
@@ -43,9 +44,9 @@ Namespace RepTreeListHierarchicalDataRelationships
 
 			headerBand.Height = 50
 			detailBand.Height = 25
-			title.Size = New Size(report.PageWidth - report.Margins.Left - report.Margins.Right - 1, 50)
+			title.SizeF = New SizeF(report.PageWidth - report.Margins.Left - report.Margins.Right - 1, 50)
 			title.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
-			title.Font = New Font(title.Font.FontFamily, 20)
+			title.Font = New DXFont(title.Font.Name, 20)
 			title.Text = "Hierarchical Data Report"
 
 			headerBand.Controls.Add(title)
@@ -67,7 +68,7 @@ Namespace RepTreeListHierarchicalDataRelationships
 		End Sub
 
 		Private Sub AddDataFieldsToBand(ByVal dataTable As DataTable, ByVal band As DetailBand, ByVal dataPath As String, ByVal addKeyFields As Boolean)
-			Dim table As XRTable = XRTable.CreateTable(New Rectangle(indent, 0, report.PageWidth - report.Margins.Left - report.Margins.Right - indent - 1, 25), 1, dataTable.Columns.Count - (If(addKeyFields, 0, 2)))
+			Dim table As XRTable = XRTable.CreateTable(New RectangleF(indent, 0, report.PageWidth - report.Margins.Left - report.Margins.Right - indent - 1, 25), 1, dataTable.Columns.Count - (If(addKeyFields, 0, 2)))
 			Dim cellIndex As Integer = 0
 
 			For i As Integer = 0 To dataTable.Columns.Count - 1
